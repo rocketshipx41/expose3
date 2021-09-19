@@ -10,7 +10,6 @@ class Artists extends MY_Controller {
         
         $this->page_data['page_name'] = 'Artists';
         $this->page_data['menu_active'] = 'artists';
-        $this->page_data['left_side'] = 'partials/left_side_default';
 
         $this->load->model('Artist_model');
         $this->load->library('ExArtist');

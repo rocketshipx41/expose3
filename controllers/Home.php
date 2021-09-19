@@ -32,13 +32,11 @@ class Home extends MY_Controller {
         $this->page_data['main_list'] = $this->Article_model->articles_by_status('live', 'any',
                 10, $offset, FALSE);
         $article_count = $this->Article_model->get_count();
-        $this->page_data['item_count'] = $article_count['0']->acount;
+        $this->page_data['item_count'] = $article_count['all']->acount;
         $this->page_data['offset'] = $offset;
 //        $this->page_data['sidebar_list'] = $this->Article_model->get_most_recent_updates();
 		$this->page_data['trace'] = $this->Article_model->trace;
 //		echo print_r($this->page_data['main_list'], TRUE); exit;
-        $this->page_data['sidebar_list'] = $this->Article_model->get_most_recent_updates();
-        $this->page_data['issue_list'] = $this->Article_model->get_issue_details('0', FALSE);
 
 		// display
         if ( $offset >= 10 ) {
@@ -51,9 +49,7 @@ class Home extends MY_Controller {
         $this->page_data['page_name'] = 'Most recent articles';
 		$this->page_data['page_title'] = lang('menu_home');
 		$this->page_data['menu_active'] = 'home';
-        $this->page_data['left_side'] = 'partials/side_issue_list';
 		$this->page_data['center_view'] = 'article/review_list';
-        $this->page_data['right_side'] = 'partials/side_recent_updates';
 		$this->load->view('layouts/base', $this->page_data);
 	}
 

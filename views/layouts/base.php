@@ -38,7 +38,7 @@ $this->load->helper('form');
                 <div class="col-sm-<?php echo $center_column_width; ?>">
                     <div class="row">
                         <div class="col-sm-12 center">
-                            <h2><?php echo $page_title; ?></h2>
+                            <h2 class="column-h2"><?php echo $page_title; ?></h2>
                         </div>
                     </div>
                     <?php include(APPPATH . 'views/' . $center_view . '.php'); ?>

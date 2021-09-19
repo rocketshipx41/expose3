@@ -7,7 +7,6 @@ class Articles extends MY_Controller {
     {
         parent::__construct();
         $this->page_data['trace'] .= '>> construct articles controller<br/>';
-        $this->page_data['left_side'] = 'partials/left_side_default';
 //        echo 'article controller'; exit;
     }
     
@@ -129,7 +128,6 @@ class Articles extends MY_Controller {
                 $this->page_data['menu_active'] = 'features';
                 break;
         }
-        $this->page_data['left_side'] = 'partials/left_side_default';
 		$this->page_data['center_view'] = $center_view;
 		$this->load->view('layouts/base', $this->page_data);
     }
@@ -266,7 +264,6 @@ class Articles extends MY_Controller {
         $this->page_data['page_title'] = lang('issue_available') . $issue_no;
         $this->page_data['page_name'] = lang('issue_available') . $issue_no;
         $this->page_data['page_name'] = lang('issue_no'). ' ' . $issue_no;
-        $this->page_data['left_side'] = 'partials/side_issue_list';
 		$this->page_data['center_view'] = 'article/review_list';
         $this->page_data['right_side'] = 'partials/side_recent_updates';
 		$this->load->view('layouts/base', $this->page_data);

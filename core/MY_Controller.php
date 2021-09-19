@@ -41,6 +41,10 @@ class MY_Controller extends CI_Controller
         $this->page_data['copyright'] = $this->config->item('copyright');
         $this->page_data['license'] = $this->config->item('license');
         $this->page_data['gtag'] = GTAG;
+        $this->page_data['issue_list'] = $this->Article_model->get_issue_details('0', FALSE);
+        $this->page_data['left_side'] = 'partials/side_issue_list';
+        $this->page_data['sidebar_list'] = $this->Article_model->get_most_recent_updates();
+        $this->page_data['right_side'] = 'partials/side_recent_updates';
 
         // get status messages coming in from session
         if ( $this->session->flashdata('incoming_status') ) {
