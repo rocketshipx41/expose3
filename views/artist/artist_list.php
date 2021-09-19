@@ -35,6 +35,13 @@
         <p class="text-right"><?php if ( $next_link != '' ) echo anchor($next_link, lang('artist_index_next')); ?></p>
     </div>
 </div>
+<?php if ( $item_count ) : ?>
+    <div class="row">
+        <div class="col-sm-12 text-center">
+            <p><em>Showing items <?php echo ($offset + 1) . ' to ' . ($offset + count($main_list)) . ' of ' . $item_count; ?></em></p>
+        </div>
+    </div>
+<?php endif; ?>
 <?php foreach ($main_list as $item) : ?>
     <div class="row">
         <div class="col-sm-12">

@@ -172,12 +172,15 @@ class Artist_model extends CI_Model
                 ->where('artist_id', $artist_id);
     }
     
-    public function get_count()
+    public function get_count($country = '')
     {
         $this->trace .= 'get_count()<br/>';
         $result = array('count' => 0, 'last-slug' => '');
         $this->db->select('count(*) acount')
                 ->from('expose_exposeorg4325340.artists');
+        if ( $country ) {
+            $this->db->where('country_id', $country);
+        }
         $query = $this->db->get();
 	    $this->trace .= 'sql: ' . $this->db->last_query() . "<br/>\n";
         $query_result = $query->row();

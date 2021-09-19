@@ -72,6 +72,9 @@ class Artists extends MY_Controller {
             $start = $this->page_data['main_list'][0]->name;
         }
         $country_name = $this->page_data['main_list'][0]->country;
+        $artist_count = $this->Artist_model->get_count($country);
+        $this->page_data['item_count'] = $artist_count['count'];
+        $this->page_data['offset'] = $offset;
 
         // display
         if ( $offset >= 10 ) {
@@ -80,7 +83,13 @@ class Artists extends MY_Controller {
         else {
             $this->page_data['prev_link'] = '';
         }
-		$this->page_data['next_link'] = 'artists/country/' . $country . '/' . $start . '/' . ($offset + 10);
+        if ( $offset < ( $this->page_data['item_count'] - 10 ) ) {
+            $this->page_data['next_link'] = 'artists/country/' . $country . '/' . $start . '/' . ($offset + 10);
+        }
+        else {
+            $this->page_data['next_link'] = '';
+        }
+//		$this->page_data['next_link'] = 'artists/country/' . $country . '/' . $start . '/' . ($offset + 10);
         $this->page_data['page_name'] = 'Artists for ' . $country_name;
         $this->page_data['list_source'] = 'country/' . $country;
         $this->page_data['page_title'] = lang('artist_index_page_title') . ' for ' . $country_name;

@@ -29,7 +29,7 @@
 </div>
 <?php endif; ?>
 <?php foreach ($main_list as $article) : ?>
-    <div class="row">
+    <div class="row bottom-buffer">
         <div class="col-sm-12">
             <h3><?php echo anchor('articles/display/' . $article->slug, $article->title); ?></h3>
             <?php if ( $article->image_file ) : ?>
@@ -39,7 +39,7 @@
             <?php if ( $article->is_media() ) : ?>
                 <?php echo $article->body; ?>
             <?php else : ?>
-            <?php echo $article->intro; ?>
+                <?php echo $article->intro; ?>
             <?php endif; ?>
         &nbsp;&raquo; <?php echo anchor('articles/display/' . $article->slug, lang('read_more')); ?>
         <br/><em>(<?php echo lang('article_posted') . ' ' 
@@ -49,8 +49,8 @@
     </div> <!-- row -->
 <?php endforeach; ?>
 <div class="row">
-<div class="col-sm-6">
-<p class="text-left"><?php if ( $prev_link != '' ) echo anchor($prev_link, lang('article_index_newer')); ?></p>
+    <div class="col-sm-6">
+        <p class="text-left"><?php if ( $prev_link != '' ) echo anchor($prev_link, lang('article_index_newer')); ?></p>
     </div>
     <div class="col-sm-6">
         <p class="text-right"><?php if ( $next_link != '' ) echo anchor($next_link, lang('article_index_older')); ?></p>
