@@ -1,15 +1,15 @@
-<?php if ( isset($issue) ) : ?>
+<?php if ( isset($page_issue) ) : ?>
 <div class="row">
     <div class="col-sm-6">
-        <p><strong><?php echo $issue->description; ?></strong></p>
+        <p><strong><?php echo $page_issue->description; ?></strong></p>
     </div>
     <div class="col-sm-6 text-right">
-        <p><strong><?php echo $issue->pages . lang('issue_pages');?></strong></p>
+        <p><strong><?php echo $page_issue->pages . lang('issue_pages');?></strong></p>
     </div>
 </div>
 <div class="row">
     <div class="col-sm-12">
-        <p><?php echo $issue->blurb;?></p>
+        <p><?php echo $page_issue->blurb;?></p>
     </div>
 </div>
 <?php endif; ?>
@@ -21,6 +21,13 @@
         <p class="text-right"><?php if ( $next_link != '' ) echo anchor($next_link, lang('article_index_older')); ?></p>
     </div>
 </div>
+<?php if ( $item_count ) : ?>
+<div class="row">
+    <div class="col-sm-12 text-center">
+        <p><em>Showing items <?php echo ($offset + 1) . ' to ' . ($offset + count($main_list)) . ' of ' . $item_count; ?></em></p>
+    </div>
+</div>
+<?php endif; ?>
 <?php foreach ($main_list as $article) : ?>
     <div class="row">
         <div class="col-sm-12">

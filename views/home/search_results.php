@@ -17,8 +17,8 @@
 </div>
 <?php if ( count($main_list) > 0 ) : ?>
 <div class="row">
-    <div class="col-sm-12">
-        <p>Showing <?php echo ($offset + 1) . ' to ' . ($offset + count($main_list)) . ' of ' . $search_total; ?></p>
+    <div class="col-sm-12 text-center">
+        <p><em>Showing <?php echo ($offset + 1) . ' to ' . ($offset + count($main_list)) . ' of ' . $search_total; ?></em></p>
     </div>
 </div>
 <?php foreach ($main_list as $item) : ?>

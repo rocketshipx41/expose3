@@ -216,21 +216,79 @@ class Article_model extends CI_Model
     function get_count($category = '')
     {
         $this->trace .= 'get_count()<br/>';
-        $this->db->select('count(*) acount')
-                ->from('articles a')
-		        ->join('categories c', 'c.id = a.category_id', 'left')
-                ->where('status', 'live')
-                ->where('a.published_on <= CURDATE()');
+        $result = array();
+        $this->db->select('category_id, category_title, slug,  acount')
+                ->from('expose_exposeorg4325340.article_count');
         if ($category != '') {
-            $this->db->where('c.slug', $category);
+            $this->db->where('slug', $category);
         }
         $query = $this->db->get();
 	    $this->trace .= 'sql: ' . $this->db->last_query() . "<br/>\n";
         $query_result = $query->row();
-        $result = $query_result->acount;
+        $qresult = $query->result();
+        foreach ($qresult as $row) {
+            $result[$row->slug] = $row;
+        }
         return $result;
     }
-    
+
+    function get_topic_count($topic = '')
+    {
+        $this->trace .= 'get_topic_count()<br/>';
+        $result = array();
+        $this->db->select('topic_id, topic_title, slug,  acount')
+            ->from('expose_exposeorg4325340.topic_count');
+        if ($topic != '') {
+            $this->db->where('slug', $topic);
+        }
+        $query = $this->db->get();
+        $this->trace .= 'sql: ' . $this->db->last_query() . "<br/>\n";
+        $query_result = $query->row();
+        $qresult = $query->result();
+        foreach ($qresult as $row) {
+            $result[$row->slug] = $row;
+        }
+        return $result;
+    }
+
+    function get_release_year_count($year = '')
+    {
+        $this->trace .= 'get_release_year_count()<br/>';
+        $result = array();
+        $this->db->select('year_released, acount')
+            ->from('expose_exposeorg4325340.release_year_count');
+        if ( $year != '' ) {
+            $this->db->where('year_released', $year);
+        }
+        $query = $this->db->get();
+        $this->trace .= 'sql: ' . $this->db->last_query() . "<br/>\n";
+        $query_result = $query->row();
+        $qresult = $query->result();
+        foreach ($qresult as $row) {
+            $result[$row->year_released] = $row;
+        }
+        return $result;
+    }
+
+    function get_recorded_year_count($year = '')
+    {
+        $this->trace .= 'get_recorded_year_count()<br/>';
+        $result = array();
+        $this->db->select('year_recorded, acount')
+            ->from('expose_exposeorg4325340.recorded_year_count');
+        if ( $year != '' ) {
+            $this->db->where('year_recorded', $year);
+        }
+        $query = $this->db->get();
+        $this->trace .= 'sql: ' . $this->db->last_query() . "<br/>\n";
+        $query_result = $query->row();
+        $qresult = $query->result();
+        foreach ($qresult as $row) {
+            $result[$row->year_recorded] = $row;
+        }
+        return $result;
+    }
+
     function get_future_dated()
     {
      	$this->trace .= 'get_future_dated<br/>';
@@ -937,7 +995,7 @@ class Article_model extends CI_Model
                 ->from('expose_exposeorg4325340.release_articles')
                 ->where('status', 'live')
                 ->where('published_on <= CURDATE()')
-                ->where("(year_recorded = '" . $year . "' or year_released = '" .  $year . "')")
+                ->where('year_released',  $year)
                 ->order_by('published_on', 'desc');
         if (($max != 0) || ($offset != 0)) {
             $this->db->limit($max, $offset);
@@ -960,7 +1018,40 @@ class Article_model extends CI_Model
         }
         return $result;
     }
-    
+
+    function get_recorded_year_articles($year, $max = 10, $offset = 0)
+    {
+        $this->trace .= 'get_recorded_year_articles<br/>';
+        $result = array();
+        $this->db->select('article_id id, release_id, slug, title, intro, category_id, '
+            . 'image_file, body, updated_on, published_on')
+            ->from('expose_exposeorg4325340.release_articles')
+            ->where('status', 'live')
+            ->where('published_on <= CURDATE()')
+            ->where('year_recorded',  $year)
+            ->order_by('published_on', 'desc');
+        if (($max != 0) || ($offset != 0)) {
+            $this->db->limit($max, $offset);
+        }
+        $query = $this->db->get();
+        $this->trace .= 'sql: ' . $this->db->last_query() . "<br/>\n";
+        $qresult = $query->result();
+        $i = 0;
+        foreach ($qresult as $row) {
+            $article =  $query->custom_row_object($i++, 'ExArticle');
+            if ( $article->is_review() ) {
+                $this->get_main_image($article);
+                $article->intro = smart_trim($article->body, 200);
+            }
+            else {
+                $article->set_image_path();
+            }
+            $this->get_credits($article);
+            $result[$article->id] = $article;
+        }
+        return $result;
+    }
+
     function get_release_reviews($release_id)
     {
 	    $this->trace .= 'get_release_reviews<br/>';

@@ -23,7 +23,11 @@ class MY_Controller extends CI_Controller
         'user_id' => '0',
         'user_name' => '',
         'user_group' => '',
-        'can_edit' => FALSE
+        'can_edit' => FALSE,
+        // page data useful
+        'item_count' => 0,
+        'offset' => 0,
+        'main_list' => array()
     );
     
     function __construct()

@@ -64,7 +64,7 @@ function topic_display($topic_list)
     if (is_array($topic_list)) {
         $temp_array = array();
         foreach ($topic_list as $item) {
-                $temp_array[$item->topic_slug] = trim(anchor('articles/topic/' . $item->topic_slug, $item->topic_title));
+            $temp_array[$item->topic_slug] = trim(anchor('articles/topic/' . $item->topic_slug, $item->topic_title));
         }
         $result = implode(', ', $temp_array);
     }
@@ -95,7 +95,7 @@ function release_line($release, $link_label = TRUE)
         else {
             $result .= $release->label_name . ' ';
         }
-        }
+    }
     $result .= $release->catalog_no . ', ';
     if (($release->year_recorded > 0) 
             && ($release->year_recorded != $release->year_released)) {
@@ -144,7 +144,7 @@ function restore_tags($input) {
 
 function image_url($image_file)
 {
-    return(base_url('assets/img/'. $image_file));
+    return(base_url('assets/img/' . $image_file));
 }
 
 /**

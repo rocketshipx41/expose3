@@ -117,6 +117,7 @@ $lang['article_random_review'] = 'Previously in Exposé...';
 $lang['random_review'] = 'Random review';
 $lang['article_image_file']  = 'Image file (680x450)';
 $lang['article_release_year_list'] = 'Reviews of releases for ';
+$lang['article_recording_year_list'] = 'Reviews of recordings from ';
 $lang['article_future_dated'] = 'Future dated articles';
 $lang['article_topic_list'] = 'Reviews of ';
 $lang['article_related_links'] = 'Related links (no "http", separate with ; )';

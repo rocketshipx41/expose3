@@ -20,7 +20,7 @@ $year_list =  '';
                 <?php if (stripos($year_list, $release->year_released) === FALSE) $year_list .= ', ' . anchor('articles/releases/' . $release->year_released,
                     $release->year_released . ' ' . lang('article_release_year_topic')); ?>
                 <?php if ( $release->year_released != $release->year_recorded) : ?>
-                    <?php if (stripos($year_list, $release->year_recorded) === FALSE) $year_list .= ', ' . anchor('articles/releases/' . $release->year_recorded,
+                    <?php if (stripos($year_list, $release->year_recorded) === FALSE) $year_list .= ', ' . anchor('articles/recordings/' . $release->year_recorded,
                         $release->year_recorded . ' ' . lang('article_record_year_topic')); ?>
                 <?php endif; ?>
             <?php endforeach; // release list ?>

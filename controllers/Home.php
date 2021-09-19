@@ -31,6 +31,9 @@ class Home extends MY_Controller {
 		// get data
         $this->page_data['main_list'] = $this->Article_model->articles_by_status('live', 'any',
                 10, $offset, FALSE);
+        $article_count = $this->Article_model->get_count();
+        $this->page_data['item_count'] = $article_count['0']->acount;
+        $this->page_data['offset'] = $offset;
 //        $this->page_data['sidebar_list'] = $this->Article_model->get_most_recent_updates();
 		$this->page_data['trace'] = $this->Article_model->trace;
 //		echo print_r($this->page_data['main_list'], TRUE); exit;

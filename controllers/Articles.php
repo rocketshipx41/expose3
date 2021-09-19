@@ -18,7 +18,9 @@ class Articles extends MY_Controller {
 
 		// get data
         $this->page_data['main_list'] = $this->Article_model->most_recent($category, 
-                    10, $offset, FALSE); 
+                    10, $offset, FALSE);
+        $article_count = $this->Article_model->get_count($category);
+        $this->page_data['item_count'] = $article_count[$category]->acount;
 		$this->page_data['trace'] = $this->Article_model->trace;
 
 		// display
@@ -28,7 +30,12 @@ class Articles extends MY_Controller {
         else {
             $this->page_data['prev_link'] = '';
         }
-		$this->page_data['next_link'] = 'articles/index/' . $category . '/' . ($offset + 10);
+        if ( $offset < ( $this->page_data['item_count'] - 10 ) ) {
+            $this->page_data['next_link'] = 'articles/index/' . $category . '/' . ($offset + 10);
+        }
+        else {
+            $this->page_data['next_link'] = '';
+        }
         $this->page_data['page_name'] = 'Most recent ' . $category;
         $this->page_data['page_title'] = lang('');
 		$this->page_data['menu_active'] = $category;
@@ -54,7 +61,7 @@ class Articles extends MY_Controller {
 	    $this->Article_model->get_artists($article);
         $this->Article_model->get_link_list($article);
         $this->Article_model->get_topics($article);
-        if ( ( count($article->topic_list)) && ($article->category_id == 1) ) {
+        if ( ( count($article->topic_list) ) && ( $article->category_id == 1 ) ) {
             $remove_intro = TRUE;
             $this->page_data['trace'] .= 'review with topics<br/>';
             foreach ($article->topic_list as $item) {
@@ -137,6 +144,9 @@ class Articles extends MY_Controller {
         // get data
         $this->page_data['main_list'] = $this->Article_model->get_topic_articles($topic_slug, 
                 10, $offset);
+        $article_count = $this->Article_model->get_topic_count();
+        $this->page_data['item_count'] = $article_count[$topic_slug]->acount;
+        $this->page_data['offset'] = $offset;
         $this->page_data['topic_slug'] = $topic_slug;
         $this->page_data['offset'] = $offset;
         $this->page_data['trace'] .= $this->Article_model->trace;
@@ -150,7 +160,12 @@ class Articles extends MY_Controller {
         else {
             $this->page_data['prev_link'] = '';
         }
-		$this->page_data['next_link'] = 'articles/topic/' . $topic_slug . '/' . ($offset + 10);
+        if ( $offset < ( $this->page_data['item_count'] - 10 ) ) {
+            $this->page_data['next_link'] = 'articles/topic/' . $topic_slug . '/' . ($offset + 10);
+        }
+        else {
+            $this->page_data['next_link'] = '';
+        }
         $this->page_data['page_title'] = lang('article_topic_list') . $topic_title;
         $this->page_data['page_name'] = lang('article_topic_list') . $topic_title;
         $this->page_data['center_view'] = 'article/review_list';
@@ -167,6 +182,9 @@ class Articles extends MY_Controller {
         // get data
         $this->page_data['main_list'] = $this->Article_model->get_release_year_articles($year,
                 10, $offset);
+        $article_count = $this->Article_model->get_release_year_count($year);
+        $this->page_data['item_count'] = $article_count[$year]->acount;
+        $this->page_data['offset'] = $offset;
 		$this->page_data['trace'] = $this->Article_model->trace;
 //        echo print_r($this->page_data['main_list'], TRUE); exit;
 
@@ -177,13 +195,53 @@ class Articles extends MY_Controller {
         else {
             $this->page_data['prev_link'] = '';
         }
-		$this->page_data['next_link'] = 'articles/releases/' . $year . '/' . ($offset + 10);
+        if ( $offset < ( $this->page_data['item_count'] - 10 ) ) {
+            $this->page_data['next_link'] = 'articles/releases/' . $year . '/' . ($offset + 10);
+        }
+        else {
+            $this->page_data['next_link'] = '';
+        }
         $this->page_data['page_title'] = lang('article_release_year_list') . ' ' . $year;
         $this->page_data['page_name'] = 'Reviews for ' . $year . ' releases';
 		$this->page_data['center_view'] = 'article/review_list';
 		$this->load->view('layouts/base', $this->page_data);
     }
-    
+
+    public function recordings($year = 0, $offset = 0)
+    {
+        // init
+        if ( $year == 0 ) {
+            redirect('');
+        }
+
+        // get data
+        $this->page_data['main_list'] = $this->Article_model->get_recorded_year_articles($year,
+            10, $offset);
+        $article_count = $this->Article_model->get_recorded_year_count($year);
+        $this->page_data['item_count'] = $article_count[$year]->acount;
+        $this->page_data['offset'] = $offset;
+        $this->page_data['trace'] = $this->Article_model->trace;
+//        echo print_r($this->page_data['main_list'], TRUE); exit;
+
+        // display
+        if ( $offset >= 10 ) {
+            $this->page_data['prev_link'] = 'articles/recordings/' . $year . '/' . ($offset - 10);
+        }
+        else {
+            $this->page_data['prev_link'] = '';
+        }
+        if ( $offset < ( $this->page_data['item_count'] - 10 ) ) {
+            $this->page_data['next_link'] = 'articles/recordings/' . $year . '/' . ($offset + 10);
+        }
+        else {
+            $this->page_data['next_link'] = '';
+        }
+        $this->page_data['page_title'] = lang('article_recording_year_list') . ' ' . $year;
+        $this->page_data['page_name'] = 'Reviews for ' . $year . ' recordings';
+        $this->page_data['center_view'] = 'article/review_list';
+        $this->load->view('layouts/base', $this->page_data);
+    }
+
     public function issue($issue_no = 0)
     {
         // init
@@ -194,9 +252,13 @@ class Articles extends MY_Controller {
         // get data
         $issue = $this->Article_model->get_issue_details($issue_no, TRUE);
         $this->page_data['main_list'] = $issue->contents;
+        $this->page_data['item_count'] = count($this->page_data['main_list']);
+        $this->page_data['offset'] = '0';
         $issue->clear_contents();
-        $this->page_data['issue'] = $issue;
+        $this->page_data['page_issue'] = $issue;
         $this->page_data['trace'] = $this->Article_model->trace;
+        $this->page_data['sidebar_list'] = $this->Article_model->get_most_recent_updates();
+        $this->page_data['issue_list'] = $this->Article_model->get_issue_details('0', FALSE);
 
 		// display
 		$this->page_data['prev_link'] = '';
@@ -204,7 +266,9 @@ class Articles extends MY_Controller {
         $this->page_data['page_title'] = lang('issue_available') . $issue_no;
         $this->page_data['page_name'] = lang('issue_available') . $issue_no;
         $this->page_data['page_name'] = lang('issue_no'). ' ' . $issue_no;
+        $this->page_data['left_side'] = 'partials/side_issue_list';
 		$this->page_data['center_view'] = 'article/review_list';
+        $this->page_data['right_side'] = 'partials/side_recent_updates';
 		$this->load->view('layouts/base', $this->page_data);
     }
     
