@@ -102,11 +102,9 @@ class Releases extends MY_Controller {
             $this->page_data['page_name'] = 'Release info | ' . $release->full_display();
         }
         $this->page_data['left_column_width'] = '1';
-        $this->page_data['left_side'] = 'partials/side_column_blank';
         $this->page_data['center_column_width'] = '10';
         $this->page_data['center_view'] = 'release/release_form';
         $this->page_data['right_column_width'] = '1';
-        $this->page_data['right_side'] = 'partials/side_column_blank';
         // echo $this->page_data['trace']; exit;
         $this->load->view('layouts/base', $this->page_data);
     }

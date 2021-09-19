@@ -48,9 +48,9 @@ class Home extends MY_Controller {
         $this->page_data['page_name'] = 'Most recent articles';
 		$this->page_data['page_title'] = lang('menu_home');
 		$this->page_data['menu_active'] = 'home';
+        $this->page_data['left_side'] = 'partials/side_issue_list';
 		$this->page_data['center_view'] = 'article/review_list';
         $this->page_data['right_side'] = 'partials/side_recent_updates';
-        $this->page_data['left_side'] = 'partials/side_issue_list';
 		$this->load->view('layouts/base', $this->page_data);
 	}
 

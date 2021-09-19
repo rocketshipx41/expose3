@@ -5,7 +5,7 @@
 ?>
 <div class="row">
     <div class="col-sm-12">
-        <h3><?php echo lang('issue_index_header'); ?></h3>
+        <h2 class="column-h2"><?php echo lang('issue_index_header'); ?></h2>
         <p><em><?php echo lang('issue_index_blurb'); ?></em></p>
     </div>
 </div>

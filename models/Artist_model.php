@@ -111,7 +111,7 @@ class Artist_model extends CI_Model
         $result = array();
         $this->db->select('skey, result_type, slug, display, name, extra, image_path, url')
                 ->from('expose_exposeorg4325340.all_search')
-                ->order_by('name');
+                ->order_by('result_type, name');
         if ( strpos($search_string, ' ') !== FALSE ) { // multiple words
             $terms = explode(' ', $search_string);
             foreach ($terms as $term) {

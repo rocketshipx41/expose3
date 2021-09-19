@@ -5,14 +5,25 @@ class MY_Controller extends CI_Controller
 {
     
     public $page_data = array(
+        // layout items
+        'page_name' => '',
+        'page_title' => '',
+        'menu_active' => 'home',
+        'left_column_width' => '2',
+        'left_side' => 'partials/side_column_blank',
+        'center_column_width' => '7',
+        'center_view' => '',
+        'right_column_width' => '3',
+        'right_side' => 'partials/side_column_blank',
+        // alert messages
         'incoming_status' => 'ok',
         'status_message' => '',
-        'center_view' => '',
-        'right_side' => '',
-        'left_side' => '',
-        'left_column_width' => '2',
-        'center_column_width' => '7',
-        'right_column_width' => '3'
+        'page_alerts' => array(),
+        // user info
+        'user_id' => '0',
+        'user_name' => '',
+        'user_group' => '',
+        'can_edit' => FALSE
     );
     
     function __construct()
@@ -26,17 +37,6 @@ class MY_Controller extends CI_Controller
         $this->page_data['copyright'] = $this->config->item('copyright');
         $this->page_data['license'] = $this->config->item('license');
         $this->page_data['gtag'] = GTAG;
-        $this->page_data['system_status_message'] = '';
-        $this->page_data['page_alerts'] = array();
-        $this->page_data['menu_active'] = 'home';
-        $this->page_data['page_name'] = '';
-        $this->load->library('ion_auth');
-        $this->page_data['incoming_status'] = '';
-        $this->page_data['status_message'] = '';
-        $this->page_data['user_id'] = '0';
-        $this->page_data['user_group'] = '';
-        $this->page_data['user_name'] = '';
-        $this->page_data['can_edit'] = FALSE;
 
         // get status messages coming in from session
         if ( $this->session->flashdata('incoming_status') ) {
@@ -94,13 +94,10 @@ class MY_Controller extends CI_Controller
     function set_flashdata_alert($alert_type, $message)
     {
         $full_message = $message;
-/*        if ( $this->status_code ) {
-            $full_message .= ' (' . $this->status_code . ')';
-        } */
         $this->session->set_flashdata(array(
             'status_message' => $full_message,
             'incoming_status' => $alert_type			
-    ));
+        ));
     }
 
 }
