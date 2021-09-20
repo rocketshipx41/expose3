@@ -91,6 +91,11 @@ $lang['advanced_search'] = 'Advanced search';
 $lang['search_results'] = 'Search results';
 $lang['search_prev'] = '&laquo; Previous';
 $lang['search_next'] = 'Next &raquo;';
+$lang['statistics_page_name'] = 'Site statistics';
+$lang['statistics_by_category'] = 'By category';
+$lang['statistics_by_topic'] = 'By topic';
+$lang['statistics_by_recording_year'] = 'Number of reviews by recording year';
+$lang['statistics_country_artist_count'] = 'Artists by country';
 
 // articles general
 $lang['article_written_by'] = 'by';

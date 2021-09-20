@@ -256,7 +256,8 @@ class Article_model extends CI_Model
         $this->trace .= 'get_release_year_count()<br/>';
         $result = array();
         $this->db->select('year_released, acount')
-            ->from('expose_exposeorg4325340.release_year_count');
+            ->from('expose_exposeorg4325340.release_year_count')
+            ->order_by('year_released');
         if ( $year != '' ) {
             $this->db->where('year_released', $year);
         }
@@ -275,7 +276,8 @@ class Article_model extends CI_Model
         $this->trace .= 'get_recorded_year_count()<br/>';
         $result = array();
         $this->db->select('year_recorded, acount')
-            ->from('expose_exposeorg4325340.recorded_year_count');
+            ->from('expose_exposeorg4325340.recorded_year_count')
+            ->order_by('year_recorded');
         if ( $year != '' ) {
             $this->db->where('year_recorded', $year);
         }

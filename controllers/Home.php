@@ -206,5 +206,24 @@ class Home extends MY_Controller {
 		$this->page_data['center_view'] = 'home/single_person';
 		$this->load->view('layouts/base', $this->page_data);
 	}
+
+    public function stats()
+    {
+        // init
+        $this->load->model('Artist_model');
+
+        // get data
+        $this->page_data['article_count'] = $this->Article_model->get_count();
+        $this->page_data['topic_count'] = $this->Article_model->get_topic_count();
+        $this->page_data['recording_year_count'] = $this->Article_model->get_recorded_year_count();
+        $this->page_data['country_artist_count'] = $this->Artist_model->country_count();
+
+        // display
+        $this->page_data['page_name'] = lang('statistics_page_name');
+        $this->page_data['page_title'] = lang('statistics_page_name');
+        $this->page_data['menu_active'] = 'home';
+        $this->page_data['center_view'] = 'home/stats';
+        $this->load->view('layouts/base', $this->page_data);
+    }
     
 }

@@ -195,6 +195,23 @@ class Artist_model extends CI_Model
         $result['last-slug'] = $query_result->slug;
         return $result;
     }
+
+    public function country_count()
+    {
+        $this->trace .= 'country_count()<br/>';
+        $result = array();
+        $this->db->select('country_id, country_name, acount')
+            ->from('expose_exposeorg4325340.artist_country_count')
+            ->order_by('country_name');
+        $query = $this->db->get();
+        $this->trace .= 'sql: ' . $this->db->last_query() . "<br/>\n";
+        $query_result = $query->row();
+        $qresult = $query->result();
+        foreach ($qresult as $row) {
+            $result[$row->country_id] = $row;
+        }
+        return $result;
+    }
     
     public function get_backlink($base = '', $count_back = 0)
     {
