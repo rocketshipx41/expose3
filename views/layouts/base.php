@@ -8,11 +8,11 @@ $this->load->helper('form');
 <html>
     <?php echo build_head($site_name, $page_name, GTAG); ?>
     <body id="expobody">
-        <div class="container">
+        <div class="container-xl">
             <div class="row">
                 <div class="col-sm-12">
-                    <img src="<?php echo image_url('site/header3.jpg'); ?>" 
-                        class="img-responsive" title="<?php echo $site_name; ?> banner"
+                    <img src="<?php echo image_url('site/header4.jpg'); ?>"
+                        class="img-fluid text-center" title="<?php echo $site_name; ?> banner"
                         alt="<?php echo $site_name; ?> banner">
                 </div>
             </div>

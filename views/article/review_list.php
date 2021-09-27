@@ -3,7 +3,7 @@
     <div class="col-sm-6">
         <p><strong><?php echo $page_issue->description; ?></strong></p>
     </div>
-    <div class="col-sm-6 text-right">
+    <div class="col-sm-6 text-end">
         <p><strong><?php echo $page_issue->pages . lang('issue_pages');?></strong></p>
     </div>
 </div>

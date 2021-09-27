@@ -26,10 +26,88 @@ function build_head($site_name, $page_name, $gtag = '', $can_edit = FALSE )
     return $result;
 }
 
+function menu_item($link, $lang, $active = FALSE)
+{
+    $result = '<li class="nav-item">' . PHP_EOL;
+    $attr = 'class="nav-link';
+    if ( $active ) $attr .= ' active';
+    $attr .= '" aria-current="page"';
+    $result .=  anchor($link, lang($lang), $attr) . PHP_EOL;
+    $result .= '</li>' . PHP_EOL;
+    return $result;
+}
+
 /*
  * see https://getbootstrap.com/docs/5.0/components/navbar/
  */
 function build_menu($menu_active = 'home', $user_name = '', $user_group = '')
+{
+    $result = '<nav class="navbar navbar-expand-lg">' . PHP_EOL;
+    $result .= '<div class="container-fluid">' . PHP_EOL;
+//    $result .= '<a class="navbar-brand" href="#">Navbar</a>' . PHP_EOL;
+    $result .= '<button class="navbar-toggler" type="button" data-bs-toggle="collapse" '
+            . 'data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" '
+            . 'aria-expanded="false" aria-label="Toggle navigation">' . PHP_EOL;
+    $result .= '<span class="navbar-toggler-icon"></span>' . PHP_EOL;
+    $result .= '</button>' . PHP_EOL;
+    $result .= '<div class="collapse navbar-collapse" id="navbarSupportedContent">' . PHP_EOL;
+    $result .= '<ul class="navbar-nav me-auto mb-2 mb-lg-0">' . PHP_EOL;
+
+    $result .= menu_item('', 'menu_home', ($menu_active == 'home'));
+    $result .= menu_item('articles/index/reviews', 'menu_reviews', ($menu_active == 'reviews'));
+    $result .= menu_item('articles/index/features', 'menu_features', ($menu_active == 'features'));
+    $result .= menu_item('articles/index/news', 'menu_news', ($menu_active == 'news'));
+    $result .= menu_item('articles/index/recommendations', 'menu_recommendations', ($menu_active == 'recommendations'));
+    $result .= menu_item('artists/index', 'menu_artists', ($menu_active == 'artists'));
+    $result .= menu_item('home/about', 'menu_about', ($menu_active == 'about'));
+    $result .= menu_item('articles/index/faqs', 'menu_faq', ($menu_active == 'faqs'));
+
+    if ( $user_name == '' ) {
+        $result .= menu_item('auth/login', 'menu_login', FALSE);
+    }
+    else {
+        $result .= '<li class="nav-item dropdown">' . PHP_EOL;
+        $result .= '<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" '
+            . 'data-bs-toggle="dropdown" aria-expanded="false">' . $user_name . '</a>' . PHP_EOL;
+        $result .= '<ul class="dropdown-menu" aria-labelledby="navbarDropdown">' . PHP_EOL;
+        // dropdown items
+        $result .= '<li>' . anchor('articles/add/recommendations', lang('add_recommendation'),
+                'class="dropdown-item"') . PHP_EOL;
+        $result .= '<li>' . anchor('articles/submissions', lang('menu_submissions'),
+                'class="dropdown-item"') . PHP_EOL;
+        $result .= '<li>' . anchor('articles/drafts', lang('menu_drafts'),
+                'class="dropdown-item"') . PHP_EOL;
+        $result .= '<li>' . anchor('articles/future', lang('menu_future'),
+                'class="dropdown-item"') . PHP_EOL;
+        $result .= '<li>' . anchor('artists/edit/', lang('artist_add'),
+                'class="dropdown-item"') . PHP_EOL;
+        if ( $user_group == 'admin' ) {
+            $result .= '<li><hr class="dropdown-divider"></li>' . PHP_EOL;
+            $result .= '<li>' . anchor('auth/index', lang('menu_user_maintenance'),
+                    'class="dropdown-item"') . PHP_EOL;
+        }
+        $result .= '<li><hr class="dropdown-divider"></li>' . PHP_EOL;
+        $result .= '<li>' . anchor('auth/change-password', lang('menu_change_password'),
+                'class="dropdown-item"') . PHP_EOL;
+        $result .= '<li>' . anchor('auth/logout', lang('menu_logout'),
+                'class="dropdown-item"') . PHP_EOL;
+        $result .= '</ul>' . PHP_EOL;
+        $result .= '</li>' . PHP_EOL;
+        $result .= '</ul>' . PHP_EOL;
+    }
+    $result .= form_open('home/search', array('id' => 'search-form', 'class' => 'd-flex'),
+            array('search_type' => 'all'));
+    $result .= form_input(array('name' => 'searchstring', 'id' => 'searchstring', 'class' => 'form-control mr-sm-1',
+            'type' => 'search', 'placeholder' => 'Search', 'aria-label' => 'Search'));
+    $result .= '<button class="btn search-btn" type="submit"><i class="fa fa-search"></i></button>' . PHP_EOL;
+    $result .= '</form>' . PHP_EOL;
+    $result .= '</div>' . PHP_EOL;
+    $result .= '</div>' . PHP_EOL;
+    $result .= '</nav>' . PHP_EOL;
+    return $result;
+}
+
+function xbuild_menu($menu_active = 'home', $user_name = '', $user_group = '')
 {
     $result = '<nav class="navbar navbar-default navbar-expand-lg">' . PHP_EOL;
     $result .= '<div class="container-fluid">' . PHP_EOL;
@@ -44,7 +122,7 @@ function build_menu($menu_active = 'home', $user_name = '', $user_group = '')
     $result .= '<ul class="nav navbar-nav" id="menu">' . PHP_EOL;
     $result .= '<li';
     if ($menu_active == 'home') $result .= ' class="active"';
-    $result .= '>' . anchor('', lang('menu_home'));
+    $result .= '>';
     $result .= '</li>' . PHP_EOL;
     $result .= '<li';
     if ($menu_active == 'features') $result .= ' class="active"';
@@ -228,7 +306,7 @@ function build_release_list($release_list, $can_edit = FALSE)
         $result .= '<tr class="release-item">' . PHP_EOL;
         $result .= '<td>' . PHP_EOL;
         $result .= '<img src="' . image_url('releases/' . $item->image_file) 
-                . '" class="artist-release-art" width="220" alt="'
+                . '" class="artist-release-art img-fluid" width="220" alt="'
                 . $item->display_artist . ' &mdash; ' . $item->display_title
                 . '" title="' . $item->display_artist . ' &mdash; ' . $item->display_title
                 . '">' . PHP_EOL;

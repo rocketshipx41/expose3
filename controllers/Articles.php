@@ -13,11 +13,14 @@ class Articles extends MY_Controller {
 	public function index($category = 'reviews', $offset = 0)
 	{
         // init
-//        echo 'articles for ' . $category; exit;
+        $list_max = 10;
+        if ( $category == 'faqs' ) {
+            $list_max = 99;
+        }
 
 		// get data
         $this->page_data['main_list'] = $this->Article_model->most_recent($category, 
-                    10, $offset, FALSE);
+                    $list_max, $offset, FALSE);
         $article_count = $this->Article_model->get_count($category);
         $this->page_data['item_count'] = $article_count[$category]->acount;
 		$this->page_data['trace'] = $this->Article_model->trace;
@@ -461,7 +464,7 @@ class Articles extends MY_Controller {
         $this->page_data['artist_list'] = $this->Artist_model->get_artist_select_list();
         $this->page_data['person_list'] = $this->Person_model->get_person_list();
         $this->page_data['topic_list'] = $this->Article_model->get_topic_select_list();
-        $this->page_data['issue_list'] = $this->Article_model->get_issue_list();
+        $this->page_data['issue_list'] = $this->Article_model->get_issue_select_list();
         $this->page_data['status_list'] = array(
             'draft' => 'Draft', 
             'submitted' => 'Submitted',
@@ -473,7 +476,12 @@ class Articles extends MY_Controller {
         $this->page_data['release_id'] = 0;
         $this->page_data['page_title'] = lang('article_edit_page_name');
         $this->page_data['page_name'] = lang('article_edit_page_name');
+        $this->page_data['left_column_width'] = '1';
+        $this->page_data['left_side'] = 'partials/side_column_blank';
+        $this->page_data['center_column_width'] = '10';
 		$this->page_data['center_view'] = 'article/article_form';
+        $this->page_data['right_column_width'] = '1';
+        $this->page_data['right_side'] = 'partials/side_column_blank';
 		$this->load->view('layouts/base', $this->page_data);
     }
 

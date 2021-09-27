@@ -7,13 +7,19 @@
 <div class="row">
     <div class="col-sm-12">
         <h2><?php echo $release->full_display(); ?></h2>
-        <img src="<?php echo image_url('releases/'. $release->image_file);?>" 
+    </div> <!-- col -->
+</div> <!-- row -->
+<div class="row">
+    <div class="col-sm-2"></div>
+    <div class="col-sm-10">
+        <img src="<?php echo image_url('releases/'. $release->image_file);?>"
                         height="400" width="400" class="artist-release-art"
                         alt="<?php echo $release->display_artist . ' &mdash; ' 
                                 . $release->display_title; ?>"
                         title="<?php echo $release->display_artist . ' &mdash; ' 
                                 . $release->display_title; ?>">
     </div> <!-- col -->
+    <div class="col-sm-2"></div>
 </div> <!-- row -->
 <dl>
     <div class="row">
