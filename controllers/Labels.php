@@ -25,7 +25,7 @@ class Labels extends MY_Controller {
 		$this->load->view('layouts/base', $this->page_data);
     }
 
-    public function display($id = 0)
+    public function display($id = 0, $offset = 0)
     {
         // init
         if ( $id == 0 ) {
@@ -35,7 +35,7 @@ class Labels extends MY_Controller {
 
         // get data
         $this->page_data['label_data'] = $this->Label_model->get_full($id);
-        $this->page_data['release_list'] = $this->Release_model->get_list_by_label($id);
+        $this->page_data['release_list'] = $this->Release_model->get_list_by_label($id, $offset);
         $this->page_data['article_list'] = $this->Article_model->get_label_article_list($id);
 //        echo '<pre>' . print_r($this->page_data['article_list']) . '</pre>'; exit;
 

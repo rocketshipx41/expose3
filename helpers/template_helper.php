@@ -17,8 +17,8 @@ function build_head($site_name, $page_name, $gtag = '', $can_edit = FALSE )
             . 'rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" '
             . 'crossorigin="anonymous">' . PHP_EOL;
     $result .= '<script src="https://kit.fontawesome.com/97d111f6f0.js" crossorigin="anonymous"></script>' . PHP_EOL;
-    $result .= '<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css?v3.1" rel="stylesheet" />' . PHP_EOL;
     if ( $can_edit ) {
+        $result .= '<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css?v3.1" rel="stylesheet" />' . PHP_EOL;
         // load whatever is needed for ckedit
     }
     $result .= '<link rel="stylesheet" href="' . base_url('assets/css/expose3.css') . '">' . PHP_EOL;
@@ -217,8 +217,8 @@ function build_page_end_scripts($can_edit = FALSE)
     $result .= '<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" '
             . 'integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" '
             . 'crossorigin="anonymous"></script>' . PHP_EOL;
-    $result .= '<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>' . PHP_EOL;
     if ( $can_edit ) {
+        $result .= '<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>' . PHP_EOL;
         $result .= '<script src="' . base_url('assets/js/ckeditor/ckeditor.js') . '"></script>' . PHP_EOL;
     }
     $result .= '<script src="' . base_url('assets/js/expose3.js') . '"></script>' . PHP_EOL;

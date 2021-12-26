@@ -151,6 +151,7 @@ class Article_model extends CI_Model
                     ->where('label_id', $id)
                     ->where('status', 'live')
                     ->where('published_on <= CURDATE()')
+                    ->distinct()
                     ->order_by('published_on', 'desc');
             $query = $this->db->get();
             $this->trace .= 'sql: ' . $this->db->last_query()  . "<br/>\n";
@@ -189,6 +190,7 @@ class Article_model extends CI_Model
                     ->from('person_articles')
                     ->where('user_id', $user_id)
                     ->where('status', $status)
+                    ->distinct()
                     ->order_by('published_on', 'desc');
             if ( $status == 'live' ) {
                 $this->db->where('published_on <= CURDATE()');
