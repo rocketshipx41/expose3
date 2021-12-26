@@ -16,12 +16,15 @@ $this->load->helper('form');
                         alt="<?php echo $site_name; ?> banner">
                 </div>
             </div>
+            <div class="container">
             <?php echo build_menu($menu_active, $user_name, $user_group); ?>
+            </div>
             <?php if ( $status_message != '' ) : ?>
-                <div class="alert alert-<?php echo $incoming_status; ?>" id="alert-box-<?php echo $incoming_status; ?>">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button><?php echo $status_message; ?></div>
+                <div class="alert alert-<?php echo $incoming_status; ?> alert-dismissable fade show"
+                     id="alert-box-<?php echo $incoming_status; ?>" role="alert">
+                    <?php echo $status_message; ?>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
             <?php endif; ?>
             <div class="row top-margin-10">
                 <div class="col-sm-12 center">

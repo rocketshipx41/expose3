@@ -87,7 +87,7 @@ $year_list =  '';
     </div> <!-- col -->
 </div> <!-- row -->
 <?php if ( $can_edit && ! $roundtable ) : ?>
-<div class='row'>
+<div class="row">
     <div class="col-sm-10">
         <?php echo anchor('articles/edit/' . $article->slug, lang('article_edit_button'),
             array('class' => 'btn btn-primary')); ?>

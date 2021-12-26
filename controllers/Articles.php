@@ -243,7 +243,7 @@ class Articles extends MY_Controller {
         $this->load->view('layouts/base', $this->page_data);
     }
 
-    public function issue($issue_no = 0)
+    public function issue($issue_no = 0, $offset = 0)
     {
         // init
         if ( $issue_no == 0 ) {
@@ -251,10 +251,10 @@ class Articles extends MY_Controller {
         }
 
         // get data
-        $issue = $this->Article_model->get_issue_details($issue_no, TRUE);
+        $issue = $this->Article_model->get_issue_details($issue_no, TRUE, 20, $offset);
         $this->page_data['main_list'] = $issue->contents;
-        $this->page_data['item_count'] = count($this->page_data['main_list']);
-        $this->page_data['offset'] = '0';
+        $this->page_data['item_count'] = $issue->acount;
+        $this->page_data['offset'] = $offset;
         $issue->clear_contents();
         $this->page_data['page_issue'] = $issue;
         $this->page_data['trace'] = $this->Article_model->trace;
@@ -264,6 +264,18 @@ class Articles extends MY_Controller {
 		// display
 		$this->page_data['prev_link'] = '';
 		$this->page_data['next_link'] = '';
+        if ( $offset >= 20 ) {
+            $this->page_data['prev_link'] = 'articles/issue/' . $issue_no . '/' . ($offset - 20);
+        }
+        else {
+            $this->page_data['prev_link'] = '';
+        }
+        if ( $offset < ( $this->page_data['item_count'] - 10 ) ) {
+            $this->page_data['next_link'] = 'articles/issue/' . $issue_no . '/' . ($offset + 20);
+        }
+        else {
+            $this->page_data['next_link'] = '';
+        }
         $this->page_data['page_title'] = lang('issue_available') . $issue_no;
         $this->page_data['page_name'] = lang('issue_available') . $issue_no;
         $this->page_data['page_name'] = lang('issue_no'). ' ' . $issue_no;

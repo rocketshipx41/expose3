@@ -93,8 +93,8 @@ function build_menu($menu_active = 'home', $user_name = '', $user_group = '')
                 'class="dropdown-item"') . PHP_EOL;
         $result .= '</ul>' . PHP_EOL;
         $result .= '</li>' . PHP_EOL;
-        $result .= '</ul>' . PHP_EOL;
     }
+    $result .= '</ul>' . PHP_EOL;
     $result .= form_open('home/search', array('id' => 'search-form', 'class' => 'd-flex'),
             array('search_type' => 'all'));
     $result .= form_input(array('name' => 'searchstring', 'id' => 'searchstring', 'class' => 'form-control mr-sm-1',
@@ -213,7 +213,7 @@ function build_page_end_scripts($can_edit = FALSE)
 {
     $result = '<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" '
             . 'integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" '
-            . 'crossorigin="anonymous"></script>"></script>' . PHP_EOL;
+            . 'crossorigin="anonymous"></script></script>' . PHP_EOL;
     $result .= '<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" '
             . 'integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" '
             . 'crossorigin="anonymous"></script>' . PHP_EOL;
@@ -323,7 +323,7 @@ function build_release_list($release_list, $can_edit = FALSE)
             $result .= anchor('releases/edit/' . $item->id, lang('release_edit_button'),
                     array('class' => 'btn btn-primary')) . '<br>' . PHP_EOL;
             $result .= anchor('articles/edit/0/' . $item->id, lang('release_review'),
-                    array('class' => 'btn btn-primary')) . PHP_EOL;
+                    array('class' => 'btn btn-success')) . PHP_EOL;
             $result .= '</td>' . PHP_EOL;
         }
         $result .= '</tr>' . PHP_EOL;

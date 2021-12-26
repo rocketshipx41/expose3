@@ -3,25 +3,43 @@
 <div id="infoMessage"><?php echo $message;?></div>
 
 <?php echo form_open("auth/login");?>
-
-  <p>
-    <?php echo lang('login_identity_label', 'identity');?>
-    <?php echo form_input($identity);?>
-  </p>
-
-  <p>
-    <?php echo lang('login_password_label', 'password');?>
-    <?php echo form_input($password);?>
-  </p>
-
-  <p>
-    <?php echo lang('login_remember_label', 'remember');?>
-    <?php echo form_checkbox('remember', '1', FALSE, 'id="remember"');?>
-  </p>
-
-
-  <p><?php echo form_submit('submit', lang('login_submit_btn'));?></p>
-
+<div class="form-group">
+    <div class="row">
+        <div class="col-sm-4">
+            <label class="control-label" for="identity"><?php echo lang('login_identity_label', 'identity'); ?></label>
+        </div>
+        <div class="col-sm-8">
+            <?php echo form_input($identity);?>
+        </div>
+    </div>
+</div>
+<div class="form-group">
+    <div class="row">
+        <div class="col-sm-4">
+            <label class="control-label" for="password"><?php echo lang('login_password_label', 'password'); ?></label>
+        </div>
+        <div class="col-sm-8">
+            <?php echo form_input($password);?>
+        </div>
+    </div>
+</div>
+<div class="form-group">
+    <div class="row">
+        <div class="col-sm-4">
+            <label class="control-label" for="password"><?php echo lang('login_remember_label', 'remember'); ?></label>
+        </div>
+        <div class="col-sm-8">
+            <?php echo form_checkbox('remember', '1', FALSE, 'id="remember"');?>
+        </div>
+    </div>
+</div>
+<div class="form-group">
+    <div class="row">
+        <div class="col-sm-12">
+            <?php echo form_submit('login-submit', lang('login_submit_btn'), array('class' => 'btn btn-primary')); ?>
+        </div>
+    </div>
+</div>
 <?php echo form_close();?>
 
 <?php echo anchor('auth/forgot-password', lang('login_forgot_password'));?></p>

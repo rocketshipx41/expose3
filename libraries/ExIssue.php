@@ -7,6 +7,7 @@ class ExIssue
     public $pub_date = '';
     public $pages = 0;
     public $blurb = '';
+    public $article_count = 0;
 
     // plus...
     public $contents = array();
