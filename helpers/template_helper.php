@@ -332,6 +332,16 @@ function build_release_list($release_list, $can_edit = FALSE)
     return $result;
 }
 
+function result_type_time_display($item)
+{
+    if ( ( $item->result_type == 'Artist' ) || ( $item->result_type == 'Release' ) ) {
+        return TRUE;
+    }
+    else {
+        return FALSE;
+    }
+}
+
 function build_brief_item_list($item_list, $list_id = '')
 {
     if ( $list_id ) {
@@ -343,7 +353,12 @@ function build_brief_item_list($item_list, $list_id = '')
     foreach ($item_list as $item) {
         $result .= '<li>';
         $result .= $item->result_type . ': ' . anchor($item->url, $item->display) . '<br>';
-        $result .= '<em>Updated ' . $item->updated . '</em>';
+        if ( result_type_time_display($item) ) {
+            $result .= '<em>Updated ' . $item->updated . '</em>';
+        }
+        else {
+            $result .= '<em>Published ' .substr($item->updated, 0, 10) . '</em>';
+        }
         $result .= '</li>' . PHP_EOL;
     }
     $result .= '</ul>' . PHP_EOL;

@@ -7,7 +7,8 @@ class Articles extends MY_Controller {
     {
         parent::__construct();
         $this->page_data['trace'] .= '>> construct articles controller<br/>';
-//        echo 'article controller'; exit;
+        $this->page_data['prev_link_label'] = 'article_index_newer'; // default to "newer"
+        $this->page_data['next_link_label'] = 'article_index_older'; // default to "older"
     }
     
 	public function index($category = 'reviews', $offset = 0)
@@ -190,6 +191,8 @@ class Articles extends MY_Controller {
 //        echo print_r($this->page_data['main_list'], TRUE); exit;
 
 		// display
+        $this->page_data['prev_link_label'] = 'article_index_previous';
+        $this->page_data['next_link_label'] = 'article_index_next';
         if ( $offset >= 10 ) {
 		    $this->page_data['prev_link'] = 'articles/releases/' . $year . '/' . ($offset - 10);
         }
@@ -225,6 +228,8 @@ class Articles extends MY_Controller {
 //        echo print_r($this->page_data['main_list'], TRUE); exit;
 
         // display
+        $this->page_data['prev_link_label'] = 'article_index_previous';
+        $this->page_data['next_link_label'] = 'article_index_next';
         if ( $offset >= 10 ) {
             $this->page_data['prev_link'] = 'articles/recordings/' . $year . '/' . ($offset - 10);
         }
@@ -262,8 +267,8 @@ class Articles extends MY_Controller {
         $this->page_data['issue_list'] = $this->Article_model->get_issue_details('0', FALSE);
 
 		// display
-		$this->page_data['prev_link'] = '';
-		$this->page_data['next_link'] = '';
+        $this->page_data['prev_link_label'] = 'article_index_previous';
+        $this->page_data['next_link_label'] = 'article_index_next';
         if ( $offset >= 20 ) {
             $this->page_data['prev_link'] = 'articles/issue/' . $issue_no . '/' . ($offset - 20);
         }

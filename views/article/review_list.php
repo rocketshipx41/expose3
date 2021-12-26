@@ -15,10 +15,10 @@
 <?php endif; ?>
 <div class="row">
     <div class="col-sm-6">
-        <p class="text-start"><?php if ( $prev_link != '' ) echo anchor($prev_link, lang('article_index_newer')); ?></p>
+        <p class="text-start"><?php if ( $prev_link != '' ) echo anchor($prev_link, lang($prev_link_label)); ?></p>
     </div>
     <div class="col-sm-6">
-        <p class="text-end"><?php if ( $next_link != '' ) echo anchor($next_link, lang('article_index_older')); ?></p>
+        <p class="text-end"><?php if ( $next_link != '' ) echo anchor($next_link, lang($next_link_label)); ?></p>
     </div>
 </div>
 <?php if ( $item_count ) : ?>
@@ -50,10 +50,10 @@
 <?php endforeach; ?>
 <div class="row">
     <div class="col-sm-6">
-        <p class="text-start"><?php if ( $prev_link != '' ) echo anchor($prev_link, lang('article_index_newer')); ?></p>
+        <p class="text-start"><?php if ( $prev_link != '' ) echo anchor($prev_link, lang($prev_link_label)); ?></p>
     </div>
     <div class="col-sm-6">
-        <p class="text-end"><?php if ( $next_link != '' ) echo anchor($next_link, lang('article_index_older')); ?></p>
+        <p class="text-end"><?php if ( $next_link != '' ) echo anchor($next_link, lang($next_link_label)); ?></p>
     </div>
 </div>
 <div class="row">
