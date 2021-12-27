@@ -299,7 +299,7 @@ function build_article_list($article_list)
     return $result;
 }
 
-function build_release_list($release_list, $can_edit = FALSE)
+function build_release_list($release_list, $can_edit = FALSE, $link_label = TRUE)
 {
     $result = '<table class="table-bordered release-list">';
     foreach ($release_list as $item) {
@@ -315,7 +315,7 @@ function build_release_list($release_list, $can_edit = FALSE)
         $result .= anchor('releases/display/'. $item->id, 
                 $item->display_artist . ' &mdash; ' . $item->display_title);
         $result .= '<br/>' . PHP_EOL;
-        $result .= release_line($item);
+        $result .= release_line($item, $link_label);
         $result .= '</td>' . PHP_EOL;
         if ( $can_edit ) {
             $result .= '<td>' . PHP_EOL;

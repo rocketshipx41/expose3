@@ -404,7 +404,8 @@ class Article_model extends CI_Model
     {
         $this->trace .= 'get_issue_articles<br/>';
         $this->db->select('id, description, pub_date, pages, blurb, acount')
-            ->from('expose_exposeorg4325340.issue_details');
+            ->from('expose_exposeorg4325340.issue_details')
+            ->order_by('id');
         if ( $issue_no ) {
             $this->db->where('id', $issue_no);
         }

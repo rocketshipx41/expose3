@@ -20,7 +20,7 @@
             <dt><?php echo lang('label_releases') . ' (' . $label_data->release_count . ')'; ?></dt>
             <dd>
             <?php if (count($release_list)) : ?>
-                <?php echo build_release_list($release_list, $can_edit); ?>
+                <?php echo build_release_list($release_list, $can_edit, FALSE); ?>
             <?php else : ?>
             <dd><em><?php echo lang('label_search_none'); ?></em></dd>
         <?php endif; ?>
