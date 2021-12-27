@@ -7,6 +7,8 @@ class Home extends MY_Controller {
     {
         parent::__construct();
         $this->page_data['trace'] .= '>> construct welcome controller<br/>';
+        $this->page_data['prev_link_label'] = 'article_index_newer'; // default to "newer"
+        $this->page_data['next_link_label'] = 'article_index_older'; // default to "older"
     }
     
 	/**
@@ -105,6 +107,8 @@ class Home extends MY_Controller {
 		$this->page_data['offset'] = $offset;
 		$this->page_data['prev_link'] = '';
 		$this->page_data['next_link'] = '';
+        $this->page_data['prev_link_label'] = 'search_prev';
+        $this->page_data['next_link_label'] = 'search_next';
 		$filter_links = array(
 			1 => array('label' => '', 'link' => ''),
 			2 => array('label' => '', 'link' => ''),

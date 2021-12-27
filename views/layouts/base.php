@@ -6,7 +6,7 @@ $this->load->helper('form');
 ?>
 <!DOCTYPE html>
 <html>
-    <?php echo build_head($site_name, $page_name, GTAG); ?>
+    <?php echo build_head($site_name, $page_name, GTAG, $can_edit); ?>
     <body id="expobody">
         <div class="container-xl">
             <div class="row">

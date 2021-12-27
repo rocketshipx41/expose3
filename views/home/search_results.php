@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-sm-2">
-        <p class="text-left"><?php if ( $prev_link != '' ) echo anchor($prev_link, lang('search_prev')); ?></p>
+        <p class="text-start"><?php if ( $prev_link != '' ) echo anchor($prev_link, lang($prev_link_label)); ?></p>
     </div>
     <?php foreach ($filter_links as $item) :  ?>
     <div class="col-sm-2">
@@ -12,7 +12,7 @@
     </div>
     <?php endforeach; ?>
     <div class="col-sm-2">
-        <p class="text-right"><?php if ( $next_link != '' ) echo anchor($next_link, lang('search_next')); ?></p>
+        <p class="text-end"><?php if ( $next_link != '' ) echo anchor($next_link, lang($next_link_label)); ?></p>
     </div>
 </div>
 <?php if ( count($main_list) > 0 ) : ?>
@@ -54,10 +54,10 @@
 <?php endforeach; ?>
 <div class="row">
     <div class="col-sm-6">
-        <p class="text-left"><?php if ( $prev_link != '' ) echo anchor($prev_link, lang('search_prev')); ?></p>
+        <p class="text-start"><?php if ( $prev_link != '' ) echo anchor($prev_link, lang($prev_link_label)); ?></p>
     </div>
     <div class="col-sm-6">
-        <p class="text-right"><?php if ( $next_link != '' ) echo anchor($next_link, lang('search_next')); ?></p>
+        <p class="text-end"><?php if ( $next_link != '' ) echo anchor($next_link, lang($next_link_label)); ?></p>
     </div>
 </div>
 <?php else : ?>
