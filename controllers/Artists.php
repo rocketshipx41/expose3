@@ -37,21 +37,23 @@ class Artists extends MY_Controller {
     public function index($start = '', $offset = 0)
     {
         // init
+        $max = 20;
 
         // get data
-        $this->page_data['main_list'] = $this->Artist_model->get_list($start, 10, $offset);
+        $this->page_data['main_list'] = $this->Artist_model->get_list($start, $max, $offset);
+        $this->page_data['item_count'] = $this->Artist_model->get_count()['count'];
         if ( ( $start == '' ) && ( count($this->page_data['main_list']) ) ) {
             $start = $this->page_data['main_list'][0]->name;
         }
 
         // display
-        if ( $offset >= 10 ) {
-		    $this->page_data['prev_link'] = 'artists/index/' . $start . '/' . ($offset - 10);
+        if ( $offset >= $max ) {
+		    $this->page_data['prev_link'] = 'artists/index/' . $start . '/' . ($offset - $max);
         }
         else {
             $this->page_data['prev_link'] = '';
         }
-		$this->page_data['next_link'] = 'artists/index/' . $start . '/' . ($offset + 10);
+		$this->page_data['next_link'] = 'artists/index/' . $start . '/' . ($offset + $max);
         $this->page_data['page_name'] = 'Artists';
         $this->page_data['list_source'] = 'index';
         $this->page_data['page_title'] = lang('artist_index_page_title');
