@@ -80,7 +80,7 @@
         <?php echo anchor('releases/edit/' . $release->id, lang('release_edit_button'),
             array('class' => 'btn btn-primary')); ?>
         <?php echo anchor('articles/edit/0/' . $release->id, lang('release_review'),
-                    array('class' => 'btn btn-primary')); ?>
+                    array('class' => 'btn btn-success')); ?>
     </div>
     <div class="col-sm-2">
         <?php echo 'ID: ' . $release->id; ?>

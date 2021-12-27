@@ -180,7 +180,7 @@ $lang['artist_new'] = 'New artist';
 $lang['artist_review_release'] = 'Review';
 $lang['artist_field_releases'] = 'Releases';
 $lang['artist_field_articles'] = 'Articles';
-$lang['artist_edit_button'] = 'Edit artist info';
+$lang['artist_edit_button'] = 'Edit';
 $lang['artist_add_release_button'] = 'Add release';
 
 // releases page
@@ -202,7 +202,7 @@ $lang['release_edit_image_file'] = 'Image file';
 $lang['release_related_artists'] = 'Related artist(s)';
 $lang['release_go_to'] = 'Post and go to';
 $lang['add_release'] = 'Add release';
-$lang['release_review'] = 'Review this release';
+$lang['release_review'] = 'Review';
 $lang['release_add_label'] = 'New label';
 $lang['release_label_popup_name'] = 'New label name';
 $lang['release_label_popup_sort'] = 'Name for sorting';
@@ -210,7 +210,7 @@ $lang['release_label_popup_country'] = 'New label country';
 $lang['release_label_popup_url'] = 'New label website';
 $lang['release_label_popup_cancel'] = 'Cancel';
 $lang['release_search_none'] = 'No releases matched your search';
-$lang['release_edit_button'] = 'Edit release info';
+$lang['release_edit_button'] = 'Edit';
 
 // labels pages
 $lang['label_index_page_title'] = 'Labels';
