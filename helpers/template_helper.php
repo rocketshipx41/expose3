@@ -219,6 +219,7 @@ function build_page_end_scripts($can_edit = FALSE)
             . 'crossorigin="anonymous"></script>' . PHP_EOL;
     if ( $can_edit ) {
         $result .= '<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>' . PHP_EOL;
+//        $result .= '<script src="https://cdn.ckeditor.com/ckeditor5/31.1.0/classic/ckeditor.js"></script>' . PHP_EOL;
         $result .= '<script src="' . base_url('assets/js/ckeditor/ckeditor.js') . '"></script>' . PHP_EOL;
     }
     $result .= '<script src="' . base_url('assets/js/expose3.js') . '"></script>' . PHP_EOL;

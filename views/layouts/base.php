@@ -23,7 +23,6 @@ $this->load->helper('form');
                 <div class="alert alert-<?php echo $incoming_status; ?> alert-dismissable fade show"
                      id="alert-box-<?php echo $incoming_status; ?>" role="alert">
                     <?php echo $status_message; ?>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             <?php endif; ?>
             <div class="row top-margin-10">
