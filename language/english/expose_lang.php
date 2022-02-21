@@ -58,6 +58,7 @@ $lang['latest_recommendations'] = 'Listen &amp; discover';
 $lang['read_more'] = 'Read more';
 $lang['more_news'] = 'More news';
 $lang['add_news'] = 'Add a news item';
+$lang['add_feature'] = 'Add a feature article';
 $lang['more_events'] = 'More events';
 $lang['add_event'] = 'Add an event';
 $lang['more_recommendations'] = 'More recommendations';

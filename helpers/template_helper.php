@@ -71,8 +71,13 @@ function build_menu($menu_active = 'home', $user_name = '', $user_group = '')
             . 'data-bs-toggle="dropdown" aria-expanded="false">' . $user_name . '</a>' . PHP_EOL;
         $result .= '<ul class="dropdown-menu" aria-labelledby="navbarDropdown">' . PHP_EOL;
         // dropdown items
+        $result .= '<li>' . anchor('articles/add/news', lang('add_news'),
+                'class="dropdown-item"') . PHP_EOL;
+        $result .= '<li>' . anchor('articles/add/features', lang('add_feature'),
+                'class="dropdown-item"') . PHP_EOL;
         $result .= '<li>' . anchor('articles/add/recommendations', lang('add_recommendation'),
                 'class="dropdown-item"') . PHP_EOL;
+        $result .= '<li><hr class="dropdown-divider"></li>' . PHP_EOL;
         $result .= '<li>' . anchor('articles/submissions', lang('menu_submissions'),
                 'class="dropdown-item"') . PHP_EOL;
         $result .= '<li>' . anchor('articles/drafts', lang('menu_drafts'),
