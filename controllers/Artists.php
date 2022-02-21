@@ -47,6 +47,7 @@ class Artists extends MY_Controller {
         }
 
         // display
+        $this->page_data['offset'] = $offset;
         if ( $offset >= $max ) {
 		    $this->page_data['prev_link'] = 'artists/index/' . $start . '/' . ($offset - $max);
         }
@@ -67,9 +68,10 @@ class Artists extends MY_Controller {
         if ( $country == '' ) {
             redirect('artists/index/0');
         }
+        $max = 20;
 
         // get data
-        $this->page_data['main_list'] = $this->Artist_model->get_country_list($country, $start, 10, $offset);
+        $this->page_data['main_list'] = $this->Artist_model->get_country_list($country, $start, $max, $offset);
         if ( ( $start == '' ) && ( count($this->page_data['main_list']) ) ) {
             $start = $this->page_data['main_list'][0]->name;
         }
@@ -79,14 +81,14 @@ class Artists extends MY_Controller {
         $this->page_data['offset'] = $offset;
 
         // display
-        if ( $offset >= 10 ) {
-		    $this->page_data['prev_link'] = 'artists/country/' . $country . '/' . $start . '/' . ($offset - 10);
+        if ( $offset >= $max ) {
+		    $this->page_data['prev_link'] = 'artists/country/' . $country . '/' . $start . '/' . ($offset - $max);
         }
         else {
             $this->page_data['prev_link'] = '';
         }
-        if ( $offset < ( $this->page_data['item_count'] - 10 ) ) {
-            $this->page_data['next_link'] = 'artists/country/' . $country . '/' . $start . '/' . ($offset + 10);
+        if ( $offset < ( $this->page_data['item_count'] - $max ) ) {
+            $this->page_data['next_link'] = 'artists/country/' . $country . '/' . $start . '/' . ($offset + $max);
         }
         else {
             $this->page_data['next_link'] = '';
