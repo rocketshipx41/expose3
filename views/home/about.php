@@ -34,8 +34,7 @@
     reviews of all important new releases &mdash; not just one, but three 
     different perspectives on the same release. Our writers are knowledgeable 
     about music and the history of music, many being musicians themselves, and 
-    are among the best in the field, having previously written for 
-    <a href="http://www.gepr.net/">Gibraltar</a>, 
-    <a href="http://myweb.tiscali.co.uk/ultimathule/audion.html">Audion</a>, 
-    <a href="http://option-magazine.com/">Option</a>, <i>i/e</i>, 
-    <a href="http://www.eurock.com/">Eurock</a>, and others.</p>
+    are among the best in the field, having previously written for Gibraltar,
+    <em><a href="https://audion1.bandcamp.com/">Audion</a></em>,
+    <em>Option</em>, <em>i/e</em>,
+    <em><a href="http://www.eurock.com/">Eurock</a></em>, and others.</p>
