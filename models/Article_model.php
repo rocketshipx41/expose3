@@ -676,7 +676,7 @@ class Article_model extends CI_Model
 	    $result = array(
             '0' => 'Select...'
         );
-	    $this->db->select('id, description')
+	    $this->db->select('id, description, pub_date')
 	    	->from('issues')
 	    	->order_by('id');
         $query = $this->db->get();
@@ -685,7 +685,7 @@ class Article_model extends CI_Model
         $i = 0;
         foreach ($qresult as $row) {
             $issue =  $query->custom_row_object($i++, 'ExIssue');
-            $result[$issue->id] = 'Issue ' . $issue->id . ' (' . $row->description . ')';
+            $result[$issue->id] = $issue->id . ' (' . $row->description . ')';
 	    }
 	    return $result;
     }

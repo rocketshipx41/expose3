@@ -16,4 +16,9 @@ class ExIssue
     {
         $this->contents = array();
     }
+
+    public function select_display()
+    {
+        return 'Issue ' . $this->id . ' (' . $this->description . ')';
+    }
 }

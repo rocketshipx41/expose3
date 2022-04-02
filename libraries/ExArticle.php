@@ -218,7 +218,7 @@ class ExArticle {
         return count($this->credit_list['2']);
     }
 
-    public function process_post_values($post_values, $user_group)
+    public function process_post_values($post_values, $user_group, $issue_list)
     {
         $result = 0;
         $this->update_values = array();
@@ -273,7 +273,10 @@ class ExArticle {
                 }
             }
             if ( $post_values['article-published'] ) {
-                if ( $post_values['article-published'] != $this->published_on ) {
+                if ( $this->update_values['issue_no'] ) {
+                    $this->update_values['published_on'] = $issue_list[$this->update_values['issue_no']]->pub_date;
+                }
+                elseif ( $post_values['article-published'] != $this->published_on ) {
                     $this->update_values['published_on'] = $post_values['article-published'];
                     $result++;
                 }
@@ -388,7 +391,7 @@ class ExArticle {
                     unset($credit_deletes[$key]);
                 }
                 else {
-                    $credit_adds[] = $new_topic;
+                    $credit_adds[] = $new_item;
                 }
                 foreach ($credit_adds as $item) {
                     $this->update_values['credits']['2'][$item] = 'insert'; 

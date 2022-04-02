@@ -412,8 +412,9 @@ class Articles extends MY_Controller {
         // process input
         if ( $this->input->post('article-category') ) {
 //            echo 'post ' . print_r($this->input->post()) . PHP_EOL . PHP_EOL; exit;
+            $issue_list = $this->Article_model->get_issue_details();
             $update_count = $article->process_post_values($this->input->post(), 
-                    $this->page_data['user_group']);
+                    $this->page_data['user_group'], $issue_list);
 //            echo '<pre> ' . print_r($article) . '</pre>'; exit;
             if ( $update_count ) {
                 $article->update_values['user_id'] = $this->page_data['user_id'];
