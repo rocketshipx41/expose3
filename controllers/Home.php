@@ -6,11 +6,12 @@ class Home extends MY_Controller {
     function __construct()
     {
         parent::__construct();
-        $this->page_data['trace'] .= '>> construct welcome controller<br/>';
+        $this->page_data['trace'] .= '>> construct home controller<br/>';
         $this->page_data['prev_link_label'] = 'article_index_newer'; // default to "newer"
         $this->page_data['next_link_label'] = 'article_index_older'; // default to "older"
+//        echo $this->page_data['trace']; exit;
     }
-    
+
 	/**
 	 * Index Page for this controller.
 	 *
@@ -29,6 +30,8 @@ class Home extends MY_Controller {
 	public function index($offset = 0)
 	{
         // init
+        $this->page_data['trace'] .= '>>> index<br/>';
+//        echo $this->page_data['trace']; exit;
 
 		// get data
         $this->page_data['main_list'] = $this->Article_model->articles_by_status('live', 'any',
@@ -37,8 +40,8 @@ class Home extends MY_Controller {
         $this->page_data['item_count'] = $article_count['all']->acount;
         $this->page_data['offset'] = $offset;
 //        $this->page_data['sidebar_list'] = $this->Article_model->get_most_recent_updates();
-		$this->page_data['trace'] = $this->Article_model->trace;
-//		echo print_r($this->page_data['main_list'], TRUE); exit;
+		$this->page_data['trace'] .= $this->Article_model->trace;
+//		echo $this->page_data['trace']; exit;
 
 		// display
         if ( $offset >= 10 ) {

@@ -55,6 +55,7 @@ class Articles extends MY_Controller {
 
         // get data
         $article = $this->Article_model->get_full($slug);
+//        echo print_r($article); exit;
         if ( ! $article->id ) {
             $this->set_flashdata_alert('info', lang('not'));
             redirect('');

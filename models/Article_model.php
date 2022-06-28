@@ -403,21 +403,20 @@ class Article_model extends CI_Model
     public function get_issue_details($issue_no = '0', $get_articles = FALSE, $max = 0, $offset = 0)
     {
         $this->trace .= 'get_issue_articles<br/>';
+        $result = array();
         $this->db->select('id, description, pub_date, pages, blurb, acount')
             ->from('expose_exposeorg4325340.issue_details')
             ->order_by('id');
         if ( $issue_no ) {
             $this->db->where('id', $issue_no);
         }
-        else {
-            $result = array();
-        }
         $query = $this->db->get();
-        $this->trace .= 'sql: ' . $this->db->last_query()  . "<br/>\n";
+        $this->trace .= 'sql: ' . $this->db->last_query() . "<br/>\n";
         $qresult = $query->result();
-        if ( $issue_no ) { // only one result
+        $this->trace .= '> error ' . $this->db->error() . "<br/>\n";
+        if ($issue_no) { // only one result
             $result = $query->custom_row_object(0, 'ExIssue');
-            if ( $get_articles ) {
+            if ($get_articles) {
                 $this->get_issue_articles($result, TRUE, $max, $offset);
             }
         }

@@ -34,6 +34,7 @@ class MY_Controller extends CI_Controller
     {
         parent::__construct();
         $this->page_data['trace'] = '>> construct my controller<br/>';
+        $this->page_data['trace'] .= '?? ' . HOSTNAME . '<br/>';
 
         // global housekeeping
         $this->page_data['site_name'] = $this->config->item('site_name');
@@ -42,9 +43,13 @@ class MY_Controller extends CI_Controller
         $this->page_data['license'] = $this->config->item('license');
         $this->page_data['gtag'] = GTAG;
         $this->page_data['issue_list'] = $this->Article_model->get_issue_details('0', FALSE);
+//        $this->page_data['issue_list'] = array();
         $this->page_data['left_side'] = 'partials/side_issue_list';
+//        echo $this->page_data['trace']; exit;
         $this->page_data['sidebar_list'] = $this->Article_model->get_most_recent_updates();
         $this->page_data['right_side'] = 'partials/side_recent_updates';
+        $this->page_data['trace'] .= '>> done with housekeeping<br/>';
+//        echo $this->page_data['trace']; exit;
 
         // get status messages coming in from session
         if ( $this->session->flashdata('incoming_status') ) {
